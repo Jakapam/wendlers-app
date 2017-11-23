@@ -10,11 +10,13 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "jade": "~1.11.0",
+    "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.13.4",
     "morgan": "~1.9.0",
     "react": "^16.1.1",
