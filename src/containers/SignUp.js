@@ -1,0 +1,49 @@
+import React, { Component } from "react";
+import { signup } from "../api";
+
+export default class SignUp extends Component {
+  state = {
+    username: "",
+    password: ""
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    signup({
+      username: this.state.username,
+      password: this.state.password
+    }).catch(err => console.log(err));
+  };
+
+  handleUserName = e => {
+    this.setState({
+      username: e.target.value
+    });
+  };
+
+  handlePassword = e => {
+    this.setState({
+      password: e.target.value
+    });
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        Username:
+        <input
+          type="text"
+          onChange={this.handleUserName}
+          value={this.state.username}
+        />
+        Password:
+        <input
+          type="text"
+          onChange={this.handlePassword}
+          value={this.state.password}
+        />
+        <button type="submit">Submit</button>
+      </form>
+    );
+  }
+}

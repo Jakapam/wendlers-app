@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 
-router.post("/user", require("./user").create);
+router.get("/test", require("./users").test);
+router.post("/users", require("./users").create);
 
 module.exports = router;
