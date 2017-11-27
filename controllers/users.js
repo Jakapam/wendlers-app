@@ -25,7 +25,7 @@ exports.create = (req, res) => {
             config.JWT_SECRET,
             { expiresIn: "24h" }
           );
-          res.status(201).json({ token });
+          res.status(201).json({ username: user.username, token });
         }
       }
     );

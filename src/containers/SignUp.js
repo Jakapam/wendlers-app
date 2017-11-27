@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { signup } from "../api";
+import { connect } from "react-redux";
+import { signup } from "../actions/users";
 
-export default class SignUp extends Component {
+class SignUp extends Component {
   state = {
     username: "",
     password: ""
@@ -9,10 +10,10 @@ export default class SignUp extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    signup({
+    this.props.signup({
       username: this.state.username,
       password: this.state.password
-    }).catch(err => console.log(err));
+    });
   };
 
   handleUserName = e => {
@@ -47,3 +48,5 @@ export default class SignUp extends Component {
     );
   }
 }
+
+export default connect(null, { signup })(SignUp);
