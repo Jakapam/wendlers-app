@@ -10,7 +10,6 @@ opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = jwt_secret;
 
 const strategy = new JwtStrategy(opts, (jwt_payload, next) => {
-  console.log(jwt_payload);
   User.findOne({ _id: jwt_payload.id }, (err, user) => {
     if (err) {
       return next(err, false);
