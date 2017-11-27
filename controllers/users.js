@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
-const config = require("../config.js");
+const jwt_secret = require("../config").JWT_SECRET;
 const bcrypt = require("bcrypt");
 
 exports.test = (req, res) => {
@@ -18,13 +18,7 @@ exports.create = (req, res) => {
         if (err) {
           res.status(400).json({ error: "request issue" });
         } else {
-          const token = jwt.sign(
-            {
-              id: user.id
-            },
-            config.JWT_SECRET,
-            { expiresIn: "24h" }
-          );
+          const token = jwt.sign({ id: user.id }, jwt_secret);
           res.status(201).json({ username: user.username, token });
         }
       }
