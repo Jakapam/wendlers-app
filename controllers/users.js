@@ -4,8 +4,10 @@ const jwt_secret = require("../config").JWT_SECRET;
 const bcrypt = require("bcrypt");
 
 exports.test = (req, res) => {
-  console.log(req.user._id);
-  return res.status(201).json({ test: "test successful!" });
+  User.findById(req.user._id, (err, user) => {
+    let program = user.generateProgram();
+    return res.status(201).json(program);
+  });
 };
 
 exports.create = (req, res) => {
@@ -31,13 +33,11 @@ exports.update = (req, res) => {
   return User.findById(req.user._id, (err, user) => {
     user.set(req.body);
     user.save((err, user) => {
-      res
-        .status(201)
-        .json({
-          username: user.username,
-          startingOneRepMaxes: user.startingOneRepMaxes,
-          currentOneRepMaxes: user.currentOneRepMaxes
-        });
+      res.status(201).json({
+        username: user.username,
+        startingOneRepMaxes: user.startingOneRepMaxes,
+        currentOneRepMaxes: user.currentOneRepMaxes
+      });
     });
   });
 };
