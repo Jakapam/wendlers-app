@@ -11,7 +11,13 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true
   },
-  oneRepMaxes: {
+  startingOneRepMaxes: {
+    deadlift1RM: Number,
+    benchpress1RM: Number,
+    squat1RM: Number,
+    militaryPress1RM: Number
+  },
+  currentOneRepMaxes: {
     deadlift1RM: Number,
     benchpress1RM: Number,
     squat1RM: Number,
