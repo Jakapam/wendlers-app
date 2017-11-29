@@ -12,5 +12,6 @@ router.use(passport.authenticate("jwt", { session: false }));
 //protected routes
 router.patch("/users", require("./users").update);
 router.get("/test", require("./users").test);
+router.get("/programtest", require("./programs").test);
 
 module.exports = router;

@@ -1,6 +1,13 @@
 const mongoose = require("./index").mongoose;
 const Program = require("./program").Program;
 
+const exerciseDataTypes = {
+  deadlift: Number,
+  benchpress: Number,
+  militaryPress: Number,
+  squat: Number
+};
+
 const userSchema = mongoose.Schema({
   username: {
     type: String,
@@ -12,28 +19,13 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true
   },
-  startingOneRepMaxes: {
-    deadlift: Number,
-    benchpress: Number,
-    squat: Number,
-    militaryPress: Number
-  },
-  currentOneRepMaxes: {
-    deadlift: Number,
-    benchpress: Number,
-    squat: Number,
-    militaryPress: Number
-  },
-  personalRecords: {
-    deadlift: Number,
-    benchpress: Number,
-    squat: Number,
-    militaryPress: Number
-  }
+  startingOneRepMaxes: exerciseDataTypes,
+  currentOneRepMaxes: exerciseDataTypes,
+  personalRecords: exerciseDataTypes
 });
 
+//TODO: add error handling and pass in callback to generateProgram()
 userSchema.methods.generateProgram = function() {
-  console.log(this);
   const program = new Program({ user: this._id });
   for (let i = 0; i < 12; i++) {
     program.cycles.push({
@@ -44,8 +36,10 @@ userSchema.methods.generateProgram = function() {
         militaryPress: this.startingOneRepMaxes.militaryPress * 0.9 + i * 5
       }
     });
+
+    program.cycles[i].generateWorkouts();
   }
-  console.log(program);
+  program.save();
   return program;
 };
 
