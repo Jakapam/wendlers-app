@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const User = require("../models/user").User;
 const jwt_secret = require("../config").JWT_SECRET;
 const bcrypt = require("bcrypt");
 const passport = require("passport");

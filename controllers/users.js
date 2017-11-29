@@ -1,14 +1,7 @@
-const User = require("../models/user");
+const User = require("../models/user").User;
 const jwt = require("jsonwebtoken");
 const jwt_secret = require("../config").JWT_SECRET;
 const bcrypt = require("bcrypt");
-
-exports.test = (req, res) => {
-  User.findById(req.user._id, (err, user) => {
-    let program = user.generateProgram();
-    return res.status(201).json(program);
-  });
-};
 
 exports.create = (req, res) => {
   return bcrypt.hash(req.body.password, 10).then(hash => {
