@@ -11,6 +11,7 @@ router.post("/login", require("./users").login);
 router.use(passport.authenticate("jwt", { session: false }));
 
 //protected routes
+router.get("/users", require("./users").show);
 router.patch("/users", require("./users").update);
 
 router.post("/programs", require("./programs").create);

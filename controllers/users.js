@@ -22,6 +22,16 @@ exports.create = (req, res) => {
   });
 };
 
+exports.show = (req, res) => {
+  return User.findById(
+    req.user._id,
+    "username startingOneRepMaxes",
+    (err, user) => {
+      res.status(201).json({ user });
+    }
+  );
+};
+
 exports.login = (req, res) => {
   User.findOne({ username: req.body.username }, (err, user) => {
     if (err) {
