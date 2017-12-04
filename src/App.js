@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import SignUp from "./containers/SignUp";
+import Login from "./containers/Login";
 import { connect } from "react-redux";
 import "./App.css";
 
 class App extends Component {
   render() {
-    console.log(this.props.username);
     return (
       <div>
         <SignUp />
+        <Login />
       </div>
     );
   }
