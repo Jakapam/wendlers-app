@@ -14,11 +14,35 @@ exports.create = (req, res) => {
         if (err) {
           res.status(400).json({ error: "request issue" });
         } else {
-          const token = jwt.sign({ id: user.id }, jwt_secret);
+          const token = jwt.sign({ id: user._id }, jwt_secret);
           res.status(201).json({ username: user.username, token });
         }
       }
     );
+  });
+};
+
+exports.login = (req, res) => {
+  User.findOne({ username: req.body.username }, (err, user) => {
+    if (err) {
+      return res.status(401).json({ error: "Sorry, something went wrong!" });
+    }
+
+    if (user === null) {
+      return res.status(401).json({ error: "Invalid Username or Password!" });
+    }
+
+    return bcrypt.compare(req.body.password, user.password_digest, function(
+      err,
+      response
+    ) {
+      if (response) {
+        const token = jwt.sign({ id: user._id }, jwt_secret);
+        res.status(201).json({ username: user.username, token, response });
+      } else {
+        res.status(401).json({ error: "Invalid Username or Password!" });
+      }
+    });
   });
 };
 

@@ -5,6 +5,7 @@ const passport = require("./auth").passport;
 
 //non-protected routes
 router.post("/users", require("./users").create);
+router.post("/login", require("./users").login);
 
 //Authentication middleware
 router.use(passport.authenticate("jwt", { session: false }));
