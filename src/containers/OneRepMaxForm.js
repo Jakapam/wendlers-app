@@ -3,10 +3,7 @@ import { connect } from "react-redux";
 import {} from "../actions/users";
 
 class OneRepMaxForm extends Component {
-  state = {
-    username: "",
-    password: ""
-  };
+  state = {};
 
   render() {
     return;
