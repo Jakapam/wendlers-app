@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
 import user from "./user_reducer";
+import program from "./program_reducer";
 
 const appReducer = combineReducers({
-  user
+  user,
+  program
 });
 
 export default (state, action) => {

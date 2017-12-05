@@ -8,7 +8,7 @@ exports.create = (req, res) => {
         console.log(err);
         return res.status(400).json({ error: "Error!" });
       } else {
-        return res.status(201).json(program);
+        return res.status(201).json({ program });
       }
     }
   );
@@ -19,7 +19,7 @@ exports.show = (req, res) => {
     if (err) {
       res.status(400).json({ error: "Error" });
     } else {
-      res.status(201).json({ payload: program });
+      res.status(201).json({ program });
     }
   });
 };

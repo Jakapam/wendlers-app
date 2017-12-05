@@ -8,3 +8,7 @@ export const getUser = token =>
   axios.get(`${apiUrl}/users`, {
     headers: { Authorization: `Bearer ${token}` }
   });
+export const getProgram = token =>
+  axios.get(`${apiUrl}/programs`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
