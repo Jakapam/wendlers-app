@@ -6,8 +6,8 @@ export const getProgramInfo = token => {
     getProgram(token)
       .then(({ data }) => {
         dispatch({
-          type: "SET_PROGRAM",
-          payload: data
+          type: "SET_CYCLES",
+          payload: data.program.cycles
         });
       })
       .catch(err => console.log(err));

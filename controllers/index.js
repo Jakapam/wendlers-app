@@ -17,4 +17,6 @@ router.patch("/users", require("./users").update);
 router.post("/programs", require("./programs").create);
 router.get("/programs", require("./programs").show);
 
+router.get("/workouts/:id", require("./workouts").show);
+
 module.exports = router;

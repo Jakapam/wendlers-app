@@ -19,16 +19,18 @@ const programSchema = mongoose.Schema({
 });
 
 programSchema.pre("save", function(next) {
-  for (let i = 0; i < 12; i++) {
-    this.cycles.push({
-      trainingMaxes: {
-        deadlift: this.startingOneRepMaxes.deadlift * 0.9 + i * 10,
-        benchpress: this.startingOneRepMaxes.benchpress * 0.9 + i * 5,
-        squat: this.startingOneRepMaxes.squat * 0.9 + i * 10,
-        militaryPress: this.startingOneRepMaxes.militaryPress * 0.9 + i * 5
-      }
-    });
-    this.cycles[i].generateWorkouts();
+  if (this.isNew) {
+    for (let i = 0; i < 12; i++) {
+      this.cycles.push({
+        trainingMaxes: {
+          deadlift: this.startingOneRepMaxes.deadlift * 0.9 + i * 10,
+          benchpress: this.startingOneRepMaxes.benchpress * 0.9 + i * 5,
+          squat: this.startingOneRepMaxes.squat * 0.9 + i * 10,
+          militaryPress: this.startingOneRepMaxes.militaryPress * 0.9 + i * 5
+        }
+      });
+      this.cycles[i].generateWorkouts();
+    }
   }
   next();
 });
